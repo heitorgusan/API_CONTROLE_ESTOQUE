@@ -27,16 +27,11 @@ public class ProdutoModel {
 	@Size(min = 3 , max = 100)
 	@Column(nullable = false, unique = true)
 	private String nome;
-	
-	@Size(min = 3 , max = 100)
-	@Column(nullable = false)
-	private String descricao;
-	
-	@Column(nullable = false)
+
+	@PositiveOrZero
 	private double valorTotalEstoque;
 	
 	@PositiveOrZero
-	@Column(nullable = false)
 	private int quantidadeAtual;
 	
 	@NotNull

@@ -1,7 +1,5 @@
 package com.controledeestoque.br.model;
 
-import java.util.List;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -9,11 +7,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "tb_precoCustoProduto")
+@Table(name = "tb_custoProdutos")
 public class PrecoCustoProdutoModel {
 	
 	@Id
@@ -22,14 +19,14 @@ public class PrecoCustoProdutoModel {
 	
 	@ManyToOne
 	@JoinColumn(name = "id_produto")
-	ProdutoModel idProduto;
-	
-	@OneToMany
-	@JoinColumn(name = "id_entrada")
-	List<EntradaModel> idEntrada;
+	ProdutoModel produto;
 	
 	@Column(nullable = false)
 	private double precoUnitario;
+	
+	@ManyToOne
+	@JoinColumn(name = "id_entrada")
+	private EntradaModel entrada;
 
 	public long getId() {
 		return id;
@@ -39,12 +36,20 @@ public class PrecoCustoProdutoModel {
 		this.id = id;
 	}
 
-	public ProdutoModel getIdProduto() {
-		return idProduto;
+	public ProdutoModel getProduto() {
+		return produto;
 	}
 
-	public void setIdProduto(ProdutoModel idProduto) {
-		this.idProduto = idProduto;
+	public void setProduto(ProdutoModel produto) {
+		this.produto = produto;
+	}
+
+	public EntradaModel getEntrada() {
+		return entrada;
+	}
+
+	public void setEntrada(EntradaModel entrada) {
+		this.entrada = entrada;
 	}
 
 	public double getPrecoUnitario() {
@@ -54,15 +59,5 @@ public class PrecoCustoProdutoModel {
 	public void setPrecoUnitario(double precoUnitario) {
 		this.precoUnitario = precoUnitario;
 	}
-
-	public List<EntradaModel> getIdEntrada() {
-		return idEntrada;
-	}
-
-	public void setIdEntrada(List<EntradaModel> idEntrada) {
-		this.idEntrada = idEntrada;
-	}
-	
-	
 	
 }

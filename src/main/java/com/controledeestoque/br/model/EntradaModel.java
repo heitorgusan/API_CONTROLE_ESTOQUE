@@ -23,7 +23,7 @@ public class EntradaModel {
 	@NotNull
 	@ManyToOne
 	@JoinColumn(name = "id_produto")
-	ProdutoModel idProduto;
+	ProdutoModel produto;
 	
 	private String nomeProduto;
 	
@@ -35,11 +35,9 @@ public class EntradaModel {
 	@NotNull
 	private int quantidade;
 	
-	private Date dataEntrada = new java.sql.Date(System.currentTimeMillis());
+	private double total;
 	
-	@ManyToOne
-	@JoinColumn(name = "id_precoCustoProduto")
-	PrecoCustoProdutoModel precoCustoProduto;
+	private Date dataEntrada = new java.sql.Date(System.currentTimeMillis());
 
 	public long getId() {
 		return id;
@@ -47,14 +45,6 @@ public class EntradaModel {
 
 	public void setId(long id) {
 		this.id = id;
-	}
-
-	public ProdutoModel getIdProduto() {
-		return idProduto;
-	}
-
-	public void setIdProduto(ProdutoModel idProduto) {
-		this.idProduto = idProduto;
 	}
 
 	public String getNomeProduto() {
@@ -88,5 +78,22 @@ public class EntradaModel {
 	public void setDataEntrada(Date dataEntrada) {
 		this.dataEntrada = dataEntrada;
 	}
+
+	public ProdutoModel getProduto() {
+		return produto;
+	}
+
+	public void setProduto(ProdutoModel produto) {
+		this.produto = produto;
+	}
+
+	public double getTotal() {
+		return total;
+	}
+
+	public void setTotal(double total) {
+		this.total = total;
+	}
+	
 	
 }
