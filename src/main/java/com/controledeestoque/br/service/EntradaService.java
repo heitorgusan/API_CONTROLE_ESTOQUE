@@ -25,7 +25,8 @@ public class EntradaService {
 		ProdutoModel produto = produtoRepository.getById(entrada.getProduto().getId());
 		entrada.setNomeProduto(produto.getNome());
 		entrada.setTotal(entrada.getQuantidade() * entrada.getPrecoUnitario());
-		//salvarHistoricoPrecoCusto(produto,entrada);
+		salvarHistoricoPrecoCusto(produto,entrada);
+		addEstoqueProduto(produto,entrada.getQuantidade());
 		return entradaRepository.save(entrada);
 	}
 	
@@ -39,5 +40,10 @@ public class EntradaService {
 		
 		precoCustoProdutoRepository.save(precoCustoProduto);
 		
+	}
+	
+	private void addEstoqueProduto(ProdutoModel produto, int quantidadeEntrada) {
+		produto.setQuantidadeAtual(produto.getQuantidadeAtual() + quantidadeEntrada);
+		produtoRepository.save(produto);
 	}
 }

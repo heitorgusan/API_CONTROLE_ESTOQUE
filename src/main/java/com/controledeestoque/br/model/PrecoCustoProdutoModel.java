@@ -1,5 +1,6 @@
 package com.controledeestoque.br.model;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -24,7 +25,7 @@ public class PrecoCustoProdutoModel {
 	@Column(nullable = false)
 	private double precoUnitario;
 	
-	@ManyToOne
+	@ManyToOne(cascade = {CascadeType.ALL})
 	@JoinColumn(name = "id_entrada")
 	private EntradaModel entrada;
 
