@@ -37,6 +37,9 @@ public class EntradaModel {
 	
 	private double total;
 	
+	@NotNull
+	private String loteProduto;
+	
 	private Date dataEntrada = new java.sql.Date(System.currentTimeMillis());
 
 	public long getId() {
@@ -93,6 +96,14 @@ public class EntradaModel {
 
 	public void setTotal(double total) {
 		this.total = total;
+	}
+
+	public String getLoteProduto() {
+		return loteProduto;
+	}
+
+	public void setLoteProduto(String loteProduto) {
+		this.loteProduto = loteProduto;
 	}
 	
 	
