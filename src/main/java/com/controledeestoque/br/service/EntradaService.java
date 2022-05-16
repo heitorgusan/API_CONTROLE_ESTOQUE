@@ -5,7 +5,6 @@ import org.springframework.stereotype.Service;
 import com.controledeestoque.br.model.EntradaModel;
 import com.controledeestoque.br.model.ProdutoModel;
 import com.controledeestoque.br.repository.EntradaRepository;
-import com.controledeestoque.br.repository.EstoqueProdutoDetalhadoRepository;
 import com.controledeestoque.br.repository.ProdutoRepository;
 
 @Service
@@ -25,12 +24,16 @@ public class EntradaService {
 		entrada.setTotal(entrada.getQuantidade() * entrada.getPrecoUnitario());
 		addEstoqueProduto(produto, entrada.getQuantidade());
 		estoqueProdutoDetalhadoService.criarTabelaEstoque(entrada);
+		somarTotalProduto(produto, entrada.getTotal());
 		return entradaRepository.save(entrada);
 	}
 	
 	private void addEstoqueProduto(ProdutoModel produto, int quantidade ){
 		produto.setQuantidadeAtual(produto.getQuantidadeAtual()+quantidade);
 		produtoRepository.save(produto);
+	}
+	private void somarTotalProduto(ProdutoModel produto, double valorTotal) {
+		produto.setValorTotalEstoque(produto.getValorTotalEstoque()+ valorTotal);
 	}
 	
 }

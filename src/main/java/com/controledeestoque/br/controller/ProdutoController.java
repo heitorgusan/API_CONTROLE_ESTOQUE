@@ -2,7 +2,6 @@ package com.controledeestoque.br.controller;
 
 import java.time.LocalDateTime;
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -31,7 +30,7 @@ public class ProdutoController {
 		
 		return ResponseEntity.ok(produtoRepository.findAll());
 	}
-	
+
 	@PostMapping
 	public ResponseEntity<ProdutoModel> post(@RequestBody ProdutoModel produto){
 		
@@ -41,7 +40,7 @@ public class ProdutoController {
 	@PutMapping
 	public ResponseEntity<ProdutoModel> put(@RequestBody ProdutoModel produto){
 		produto.setUltimaAlteracao(LocalDateTime.now());
-		return ResponseEntity.ok(produtoRepository.save(produto));
+		return ResponseEntity.status(HttpStatus.OK).body(produtoRepository.save(produto));
 	}
 	
 	@DeleteMapping("/{id}")

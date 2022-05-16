@@ -1,6 +1,5 @@
 package com.controledeestoque.br.model;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -23,16 +22,16 @@ public class EstoqueProdutoDetalhadoModel {
 	@JoinColumn(name = "id_produto")
 	private ProdutoModel produto;
 	
-	@ManyToOne(cascade = {CascadeType.ALL})
-	@JoinColumn(name = "id_entrada")
-	private EntradaModel entrada;
+	//@ManyToOne(cascade = {CascadeType.ALL})
+	//@JoinColumn(name = "id_entrada")
+	//private EntradaModel entrada;
 	
 	@NotNull
 	private String loteProduto;
 	
 	@NotNull
 	@PositiveOrZero
-	private double precoCustoLote;
+	private double precoCustoUnitario;
 	
 	@NotNull
 	@PositiveOrZero
@@ -57,13 +56,6 @@ public class EstoqueProdutoDetalhadoModel {
 		this.produto = produto;
 	}
 
-	public EntradaModel getEntrada() {
-		return entrada;
-	}
-
-	public void setEntrada(EntradaModel entrada) {
-		this.entrada = entrada;
-	}
 
 	public String getLoteProduto() {
 		return loteProduto;
@@ -73,12 +65,14 @@ public class EstoqueProdutoDetalhadoModel {
 		this.loteProduto = loteProduto;
 	}
 
-	public double getPrecoCustoLote() {
-		return precoCustoLote;
+	
+
+	public double getPrecoCustoUnitario() {
+		return precoCustoUnitario;
 	}
 
-	public void setPrecoCustoLote(double precoCustoLote) {
-		this.precoCustoLote = precoCustoLote;
+	public void setPrecoCustoUnitario(double precoCustoUnitario) {
+		this.precoCustoUnitario = precoCustoUnitario;
 	}
 
 	public int getQuantidadeEstoqueLote() {
