@@ -1,6 +1,5 @@
 package com.controledeestoque.br.controller;
 
-import java.time.LocalDateTime;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -16,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.controledeestoque.br.model.ProdutoModel;
 import com.controledeestoque.br.repository.ProdutoRepository;
+import com.controledeestoque.br.service.ProdutoService;
 
 @RestController
 @RequestMapping("/produtos")
@@ -24,6 +24,9 @@ public class ProdutoController {
 
 	@Autowired
 	ProdutoRepository produtoRepository;
+	
+	@Autowired
+	ProdutoService produtoService;
 	
 	@GetMapping
 	public ResponseEntity<List<ProdutoModel>>GetAll(){
@@ -39,8 +42,11 @@ public class ProdutoController {
 	
 	@PutMapping
 	public ResponseEntity<ProdutoModel> put(@RequestBody ProdutoModel produto){
-		produto.setUltimaAlteracao(LocalDateTime.now());
-		return ResponseEntity.status(HttpStatus.OK).body(produtoRepository.save(produto));
+		 //ProdutoModel produto = produtoRepository.getById(produtoAtualizar.getId());
+		//produtoAtualizar.setUltimaAlteracao(LocalDateTime.now());
+		//produtoAtualizar.setQuantidadeAtual(produto.getQuantidadeAtual());
+		//produtoAtualizar.setValorTotalEstoque(produto.getValorTotalEstoque());
+		return ResponseEntity.status(HttpStatus.OK).body(produtoService.atualizarProduto(produto));
 	}
 	
 	@DeleteMapping("/{id}")

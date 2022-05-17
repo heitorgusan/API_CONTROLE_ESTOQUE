@@ -14,26 +14,34 @@ public class EntradaService {
 	EntradaRepository entradaRepository;
 	
 	@Autowired
+	ProdutoService produtoService;
+	
+	@Autowired
 	ProdutoRepository produtoRepository;
 	
 	@Autowired
 	EstoqueProdutoDetalhadoService estoqueProdutoDetalhadoService;
 	public EntradaModel cadastrarEntradaProduto(EntradaModel entrada) {
+		
 		ProdutoModel produto = produtoRepository.getById(entrada.getProduto().getId());
-		entrada.setNomeProduto(produto.getNome());
-		entrada.setTotal(entrada.getQuantidade() * entrada.getPrecoUnitario());
-		addEstoqueProduto(produto, entrada.getQuantidade());
+		
+		//Atualizar Produto
+		produtoService.atualizarProdutoComEntrada(produto, entrada);
+		
+		//Criar Tabela Estoque
 		estoqueProdutoDetalhadoService.criarTabelaEstoque(entrada);
-		somarTotalProduto(produto, entrada.getTotal());
+		
+		//AtualizarEntrada
+		addNomeMaisTotalEntrada(produto.getNome(), entrada);
+		
 		return entradaRepository.save(entrada);
 	}
 	
-	private void addEstoqueProduto(ProdutoModel produto, int quantidade ){
-		produto.setQuantidadeAtual(produto.getQuantidadeAtual()+quantidade);
-		produtoRepository.save(produto);
+	
+	private void addNomeMaisTotalEntrada(String nomeProduto, EntradaModel entrada) {
+		entrada.setNomeProduto(nomeProduto);
+		entrada.setTotal(entrada.getQuantidade() * entrada.getPrecoUnitario());
 	}
-	private void somarTotalProduto(ProdutoModel produto, double valorTotal) {
-		produto.setValorTotalEstoque(produto.getValorTotalEstoque()+ valorTotal);
-	}
+	
 	
 }
