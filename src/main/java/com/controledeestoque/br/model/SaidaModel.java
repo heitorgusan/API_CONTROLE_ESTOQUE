@@ -28,6 +28,11 @@ public class SaidaModel {
 	@NotNull
 	private String loteProduto;
 	
+	
+	@ManyToOne
+	@JoinColumn(name = "id_estoque")
+	private EstoqueProdutoDetalhadoModel estoque;
+	
 	@NotNull
 	@Positive
 	private int quantidade;
@@ -61,6 +66,14 @@ public class SaidaModel {
 		this.loteProduto = loteProduto;
 	}
 
+	public EstoqueProdutoDetalhadoModel getEstoque() {
+		return estoque;
+	}
+
+	public void setEstoque(EstoqueProdutoDetalhadoModel estoque) {
+		this.estoque = estoque;
+	}
+
 	public int getQuantidade() {
 		return quantidade;
 	}
@@ -84,5 +97,6 @@ public class SaidaModel {
 	public void setDataSaida(Date dataSaida) {
 		this.dataSaida = dataSaida;
 	}
+	
 	
 }

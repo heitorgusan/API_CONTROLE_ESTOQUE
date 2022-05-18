@@ -11,7 +11,12 @@ public class SaidaService {
 	
 	@Autowired
 	SaidaRepository saidaRepository;
+	
+	@Autowired
+	ProdutoService produtoService;
+	
 	public SaidaModel criarSaida(SaidaModel saida) {
+		
 		
 		return saidaRepository.save(saida);
 	}
