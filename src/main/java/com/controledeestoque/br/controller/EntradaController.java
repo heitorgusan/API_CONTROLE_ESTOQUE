@@ -35,10 +35,11 @@ public class EntradaController {
 		
 		return ResponseEntity.ok(entradaRepository.findAll());
 	}
+	
 	@PostMapping
 	public ResponseEntity<EntradaModel> post(@RequestBody EntradaModel entrada){
 		
-		return ResponseEntity.status(HttpStatus.CREATED).body(entradaService.cadastrarEntradaProduto(entrada));
+		return ResponseEntity.status(HttpStatus.CREATED).body(entradaService.cadastrarEntrada(entrada));
 	}
 	
 	/*

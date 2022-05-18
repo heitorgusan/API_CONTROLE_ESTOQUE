@@ -19,8 +19,7 @@ public class EntradaModel {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
-	
-	@NotNull
+
 	@ManyToOne
 	@JoinColumn(name = "id_produto")
 	ProdutoModel produto;
@@ -35,7 +34,7 @@ public class EntradaModel {
 	@NotNull
 	private int quantidade;
 	
-	private double total;
+	private double valorTotal;
 	
 	@NotNull
 	private String loteProduto;
@@ -90,12 +89,14 @@ public class EntradaModel {
 		this.produto = produto;
 	}
 
-	public double getTotal() {
-		return total;
+	
+
+	public double getValorTotal() {
+		return valorTotal;
 	}
 
-	public void setTotal(double total) {
-		this.total = total;
+	public void setValorTotal(double valorTotal) {
+		this.valorTotal = valorTotal;
 	}
 
 	public String getLoteProduto() {

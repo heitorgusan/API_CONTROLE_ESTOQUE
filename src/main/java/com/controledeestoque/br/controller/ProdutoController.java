@@ -42,10 +42,6 @@ public class ProdutoController {
 	
 	@PutMapping
 	public ResponseEntity<ProdutoModel> put(@RequestBody ProdutoModel produto){
-		 //ProdutoModel produto = produtoRepository.getById(produtoAtualizar.getId());
-		//produtoAtualizar.setUltimaAlteracao(LocalDateTime.now());
-		//produtoAtualizar.setQuantidadeAtual(produto.getQuantidadeAtual());
-		//produtoAtualizar.setValorTotalEstoque(produto.getValorTotalEstoque());
 		return ResponseEntity.status(HttpStatus.OK).body(produtoService.atualizarProduto(produto));
 	}
 	

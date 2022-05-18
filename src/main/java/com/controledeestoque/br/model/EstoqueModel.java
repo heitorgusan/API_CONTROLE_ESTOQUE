@@ -12,7 +12,7 @@ import javax.validation.constraints.PositiveOrZero;
 
 @Entity
 @Table(name = "tb_estoqueProdutoDetalhado")
-public class EstoqueProdutoDetalhadoModel {
+public class EstoqueModel {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,10 +21,6 @@ public class EstoqueProdutoDetalhadoModel {
 	@ManyToOne
 	@JoinColumn(name = "id_produto")
 	private ProdutoModel produto;
-	
-	//@ManyToOne(cascade = {CascadeType.ALL})
-	//@JoinColumn(name = "id_entrada")
-	//private EntradaModel entrada;
 	
 	@NotNull
 	private String loteProduto;

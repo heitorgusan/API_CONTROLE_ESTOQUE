@@ -29,10 +29,10 @@ public class ProdutoModel {
 	private String nome;
 
 	@PositiveOrZero
-	private double valorTotalEstoque;
+	private double valorTotal;
 	
 	@PositiveOrZero
-	private int quantidadeAtual;
+	private int quantidade;
 	
 	@NotNull
 	@PositiveOrZero
@@ -65,12 +65,20 @@ public class ProdutoModel {
 		this.nome = nome;
 	}
 
-	public int getQuantidadeAtual() {
-		return quantidadeAtual;
+	public double getValorTotal() {
+		return valorTotal;
 	}
 
-	public void setQuantidadeAtual(int quantidadeAtual) {
-		this.quantidadeAtual = quantidadeAtual;
+	public void setValorTotal(double valorTotal) {
+		this.valorTotal = valorTotal;
+	}
+
+	public int getQuantidade() {
+		return quantidade;
+	}
+
+	public void setQuantidade(int quantidade) {
+		this.quantidade = quantidade;
 	}
 
 	public int getQuantidadeMinima() {
@@ -103,14 +111,6 @@ public class ProdutoModel {
 
 	public void setUltimaAlteracao(LocalDateTime ultimaAlteracao) {
 		this.ultimaAlteracao = ultimaAlteracao;
-	}
-
-	public double getValorTotalEstoque() {
-		return valorTotalEstoque;
-	}
-
-	public void setValorTotalEstoque(double valorTotalEstoque) {
-		this.valorTotalEstoque = valorTotalEstoque;
 	}
 	
 }
