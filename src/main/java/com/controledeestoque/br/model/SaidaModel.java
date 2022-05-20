@@ -29,6 +29,40 @@ public class SaidaModel {
 	private double valorTotal;
 	
 	private Date dataSaida = new java.sql.Date(System.currentTimeMillis());
-	
-	
+
+	public long getId() {
+		return id;
+	}
+
+	public void setId(long id) {
+		this.id = id;
+	}
+
+	public EntradaModel getEntrada() {
+		return entrada;
+	}
+
+	public void setEntrada(EntradaModel entrada) {
+		this.entrada = entrada;
+	}
+
+	public int getQuantidade() {
+		return quantidade;
+	}
+
+	public void setQuantidade(int quantidade) {
+		this.quantidade = quantidade;
+	}
+
+	public double getValorTotal() {
+		return valorTotal;
+	}
+
+	public void setValorTotal(double valorTotal) {
+		this.valorTotal = valorTotal;
+	}
+
+	public Date getDataSaida() {
+		return dataSaida;
+	}
 }

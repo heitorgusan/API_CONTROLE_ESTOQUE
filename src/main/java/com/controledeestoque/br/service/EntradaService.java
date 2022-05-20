@@ -16,10 +16,15 @@ public class EntradaService {
 	
 	@Autowired
 	ProdutoRepository produtoRepository;
+	@Autowired
+	ProdutoService produtoService;
 	public EntradaModel cadastrarEntrada(EntradaModel entrada) {
 		entrada.setNomeProduto(findNomeProduto(entrada.getProduto()));
 		entrada.setValorTotal(calcularValorTotal(entrada.getQuantidade(),entrada.getPrecoUnitario()));
-		return entrada;
+		produtoService.atualizarQuantidade(entrada.getProduto(), entrada.getQuantidade(),true);
+		System.out.println(entrada.getQuantidade());
+		produtoService.atualizarValorTotal(entrada.getProduto(), entrada.getValorTotal(),true);
+		return entradaRepository.save(entrada);
 	}
 	private String findNomeProduto(ProdutoModel produto) {
 		return produtoRepository.getById(produto.getId()).getNome();
@@ -27,4 +32,6 @@ public class EntradaService {
 	private double calcularValorTotal(int quantidade, double precoUnitario) {
 		return quantidade * precoUnitario;
 	}
+	
+	
 }

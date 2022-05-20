@@ -21,6 +21,30 @@ public class ProdutoService {
 		return produtoRepository.save(produto);
 	}
 	
+	public void atualizarQuantidade(ProdutoModel produto, int quantidade,boolean adcionar) {
+		ProdutoModel produtoAtualizado = produtoRepository.getById(produto.getId());
+		if(adcionar) {
+			produtoAtualizado.setQuantidade(produtoAtualizado.getQuantidade() + quantidade);
+			
+		}else {
+			produtoAtualizado.setQuantidade(produtoAtualizado.getQuantidade() - quantidade);
+		}
+		produtoRepository.save(produtoAtualizado);
+		
+	}
+	
+	public void atualizarValorTotal(ProdutoModel produto, double valorTotal, boolean adcionar) {
+		ProdutoModel produtoAtualizado = produtoRepository.getById(produto.getId());
+		if(adcionar) {
+			
+			produtoAtualizado.setValorTotal(produtoAtualizado.getValorTotal() + valorTotal);
+		}else {
+			produtoAtualizado.setValorTotal(produtoAtualizado.getValorTotal()  - valorTotal);
+			
+		}
+		produtoRepository.save(produtoAtualizado);
+	}
+	
 	
 	
 }

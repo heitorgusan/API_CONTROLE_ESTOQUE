@@ -5,4 +5,6 @@ import com.controledeestoque.br.model.EntradaModel;
 
 public interface EntradaRepository extends JpaRepository<EntradaModel,Long> {
 
+	
+
 }
