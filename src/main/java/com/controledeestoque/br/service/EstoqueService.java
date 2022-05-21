@@ -20,7 +20,7 @@ public class EstoqueService {
 		boolean isNovo = true;
 		for(EstoqueModel estoqueItem : buscaLote) {
 			
-			if(isSameLoteAndPreco(estoqueItem, entrada.getLoteProduto(), entrada.getPrecoUnitario()) ){
+			if(isSameLoteAndPreco(estoqueItem, entrada.getLoteProduto(), entrada.getPrecoUnitario(),entrada.getProduto().getId()) ){
 				estoqueItem.setQuantidadeEstoqueLote(entrada.getQuantidade()+ estoqueItem.getQuantidadeEstoqueLote());
 				estoqueItem.setValorTotalLote(estoqueItem.getValorTotalLote() + entrada.getValorTotal());
 				estoqueRepository.save(estoqueItem);
@@ -29,20 +29,22 @@ public class EstoqueService {
 			}
 		}
 		if(isNovo) {
-			estoque.setLoteProduto(entrada.getLoteProduto());
-			estoque.setPrecoCustoUnitario(entrada.getPrecoUnitario());
-			estoque.setProduto(entrada.getProduto());
-			estoque.setQuantidadeEstoqueLote(entrada.getQuantidade());
-			estoque.setPrecoCustoUnitario(entrada.getPrecoUnitario());
-			estoqueRepository.save(estoque);
-			System.out.println("ooi");
+			criarNovoEstoque(estoque,entrada);
 		}
 	}
 		
 	
-	private boolean isSameLoteAndPreco(EstoqueModel estoque, String lote, double precoCusto) {
+	private boolean isSameLoteAndPreco(EstoqueModel estoque, String lote, double precoCusto,long idProduto) {
 		
-		return estoque.getLoteProduto().equals(lote)&& precoCusto == estoque.getPrecoCustoUnitario();
+		return estoque.getLoteProduto().equals(lote) && precoCusto == estoque.getPrecoCustoUnitario() && idProduto == estoque.getProduto().getId();
 	}
-	
+	private void criarNovoEstoque(EstoqueModel estoque, EntradaModel entrada){
+		estoque.setLoteProduto(entrada.getLoteProduto());
+		estoque.setPrecoCustoUnitario(entrada.getPrecoUnitario());
+		estoque.setProduto(entrada.getProduto());
+		estoque.setQuantidadeEstoqueLote(entrada.getQuantidade());
+		estoque.setPrecoCustoUnitario(entrada.getPrecoUnitario());
+		estoque.setValorTotalLote(estoque.getValorTotalLote() + entrada.getValorTotal());
+		estoqueRepository.save(estoque);
+	}
 }
