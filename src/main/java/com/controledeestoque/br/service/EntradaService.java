@@ -18,12 +18,16 @@ public class EntradaService {
 	ProdutoRepository produtoRepository;
 	@Autowired
 	ProdutoService produtoService;
+	
+	@Autowired
+	EstoqueService estoqueService;
 	public EntradaModel cadastrarEntrada(EntradaModel entrada) {
+		
 		entrada.setNomeProduto(findNomeProduto(entrada.getProduto()));
 		entrada.setValorTotal(calcularValorTotal(entrada.getQuantidade(),entrada.getPrecoUnitario()));
 		produtoService.atualizarQuantidade(entrada.getProduto(), entrada.getQuantidade(),true);
-		System.out.println(entrada.getQuantidade());
 		produtoService.atualizarValorTotal(entrada.getProduto(), entrada.getValorTotal(),true);
+		estoqueService.criarEstoque(entrada);
 		return entradaRepository.save(entrada);
 	}
 	private String findNomeProduto(ProdutoModel produto) {
