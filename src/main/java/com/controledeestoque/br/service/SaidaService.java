@@ -22,16 +22,17 @@ public class SaidaService {
 	
 	@Autowired
 	EntradaRepository entradaRepository;
-	
+	@Autowired
+	EstoqueService estoqueService;
 
 	public SaidaModel criarSaida(SaidaModel saida) {
 		
 		EntradaModel entrada = entradaRepository.getById(saida.getEntrada().getId());
-		
 		saida.setValorTotal(calcValorTotalSaida(saida.getQuantidade(),entrada));
-		
 		produtoService.atualizarQuantidade(entrada.getProduto(), saida.getQuantidade(), false);
 		produtoService.atualizarValorTotal(entrada.getProduto(), saida.getValorTotal(), false);
+		estoqueService.atualizarQuantidade(estoqueService.buscarEstoque(entrada), saida.getQuantidade(), false);
+		estoqueService.atualizarValorTotal(estoqueService.buscarEstoque(entrada), saida.getValorTotal(), false);
 		
 		return saidaRepository.save(saida);
 	}

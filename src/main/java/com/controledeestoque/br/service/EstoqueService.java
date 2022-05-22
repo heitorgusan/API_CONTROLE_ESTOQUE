@@ -47,4 +47,45 @@ public class EstoqueService {
 		estoque.setValorTotalLote(estoque.getValorTotalLote() + entrada.getValorTotal());
 		estoqueRepository.save(estoque);
 	}
+	
+	public EstoqueModel buscarEstoque(EntradaModel entrada) {
+		String loteProduto = entrada.getLoteProduto();
+		double precoPago = entrada.getPrecoUnitario();
+		long idProduto = entrada.getProduto().getId();
+		
+		List<EstoqueModel> estoqueLotes = estoqueRepository.findAllByloteProdutoContainingIgnoreCase(loteProduto);
+		
+		for(EstoqueModel estoqueItem : estoqueLotes) {
+			
+			if(isSameLoteAndPreco(estoqueItem, loteProduto, precoPago, idProduto)) {
+				return estoqueItem;
+			}	
+		}
+		return null;
+			
+	}
+	
+	public void atualizarQuantidade(EstoqueModel estoque, int quantidade, boolean adcionar) {
+		EstoqueModel estoqueAtualizado = estoqueRepository.getById(estoque.getId());
+		if(adcionar) {
+			
+			estoqueAtualizado.setQuantidadeEstoqueLote(estoqueAtualizado.getQuantidadeEstoqueLote() + quantidade);
+		}else {
+			estoqueAtualizado.setQuantidadeEstoqueLote(estoqueAtualizado.getQuantidadeEstoqueLote()  - quantidade);
+			
+		}
+		estoqueRepository.save(estoqueAtualizado);
+	}
+	
+	public void atualizarValorTotal(EstoqueModel estoque, double valorTotal, boolean adcionar) {
+		EstoqueModel estoqueAtualizado = estoqueRepository.getById(estoque.getId());
+		if(adcionar) {
+			
+			estoqueAtualizado.setValorTotalLote(estoqueAtualizado.getValorTotalLote() + valorTotal);
+		}else {
+			estoqueAtualizado.setValorTotalLote(estoqueAtualizado.getValorTotalLote()  - valorTotal);
+			
+		}
+		estoqueRepository.save(estoqueAtualizado);
+	}
 }
