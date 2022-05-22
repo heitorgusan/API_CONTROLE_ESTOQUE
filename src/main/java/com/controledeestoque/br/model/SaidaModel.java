@@ -20,8 +20,8 @@ public class SaidaModel {
 	private long id;
 	
 	@ManyToOne
-	@JoinColumn(name = "id_entrada")
-	private EntradaModel entrada;
+	@JoinColumn(name = "id_estoque")
+	private EstoqueModel estoque;
 	
 	@Positive
 	private int quantidade;
@@ -38,12 +38,18 @@ public class SaidaModel {
 		this.id = id;
 	}
 
-	public EntradaModel getEntrada() {
-		return entrada;
+	
+
+	public EstoqueModel getEstoque() {
+		return estoque;
 	}
 
-	public void setEntrada(EntradaModel entrada) {
-		this.entrada = entrada;
+	public void setEstoque(EstoqueModel estoque) {
+		this.estoque = estoque;
+	}
+
+	public void setDataSaida(Date dataSaida) {
+		this.dataSaida = dataSaida;
 	}
 
 	public int getQuantidade() {

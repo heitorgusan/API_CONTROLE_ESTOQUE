@@ -3,9 +3,12 @@ package com.controledeestoque.br.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.controledeestoque.br.model.EntradaModel;
+import com.controledeestoque.br.model.EstoqueModel;
+import com.controledeestoque.br.model.ProdutoModel;
 import com.controledeestoque.br.model.SaidaModel;
 import com.controledeestoque.br.repository.EntradaRepository;
+import com.controledeestoque.br.repository.EstoqueRepository;
+import com.controledeestoque.br.repository.ProdutoRepository;
 import com.controledeestoque.br.repository.SaidaRepository;
 
 @Service
@@ -25,19 +28,24 @@ public class SaidaService {
 	@Autowired
 	EstoqueService estoqueService;
 
+	@Autowired
+	EstoqueRepository estoqueRepository;
+	
+	@Autowired
+	ProdutoRepository produtoRepository;
+	
 	public SaidaModel criarSaida(SaidaModel saida) {
-		
-		EntradaModel entrada = entradaRepository.getById(saida.getEntrada().getId());
-		saida.setValorTotal(calcValorTotalSaida(saida.getQuantidade(),entrada));
-		produtoService.atualizarQuantidade(entrada.getProduto(), saida.getQuantidade(), false);
-		produtoService.atualizarValorTotal(entrada.getProduto(), saida.getValorTotal(), false);
-		estoqueService.atualizarQuantidade(estoqueService.buscarEstoque(entrada), saida.getQuantidade(), false);
-		estoqueService.atualizarValorTotal(estoqueService.buscarEstoque(entrada), saida.getValorTotal(), false);
-		
+		EstoqueModel estoque = estoqueRepository.getById(saida.getEstoque().getId());
+		saida.setValorTotal(calcValorTotalSaida(saida.getQuantidade(),estoque));
+		produtoService.atualizarQuantidade(estoque.getProduto(),saida.getQuantidade(),false);
+		produtoService.atualizarValorTotal(estoque.getProduto(), saida.getValorTotal(), false);
+		estoqueService.atualizarQuantidade(estoque, saida.getQuantidade(), false);
+		estoqueService.atualizarValorTotal(estoque, saida.getValorTotal(), false);
 		return saidaRepository.save(saida);
 	}
-
-	private double calcValorTotalSaida(int quantidade, EntradaModel entrada) {
-		return quantidade * entrada.getPrecoUnitario();
+	
+	
+	private double calcValorTotalSaida(int quantidade, EstoqueModel estoque) {
+		return quantidade * estoque.getPrecoCustoUnitario();
 	}
 }

@@ -48,24 +48,7 @@ public class EstoqueService {
 		estoqueRepository.save(estoque);
 	}
 	
-	public EstoqueModel buscarEstoque(EntradaModel entrada) {
-		String loteProduto = entrada.getLoteProduto();
-		double precoPago = entrada.getPrecoUnitario();
-		long idProduto = entrada.getProduto().getId();
-		
-		List<EstoqueModel> estoqueLotes = estoqueRepository.findAllByloteProdutoContainingIgnoreCase(loteProduto);
-		
-		for(EstoqueModel estoqueItem : estoqueLotes) {
-			
-			if(isSameLoteAndPreco(estoqueItem, loteProduto, precoPago, idProduto)) {
-				return estoqueItem;
-			}	
-		}
-		return null;
-			
-	}
-	
-	public void atualizarQuantidade(EstoqueModel estoque, int quantidade, boolean adcionar) {
+	public void atualizarQuantidade(EstoqueModel estoque, int quantidade,boolean adcionar) {
 		EstoqueModel estoqueAtualizado = estoqueRepository.getById(estoque.getId());
 		if(adcionar) {
 			
@@ -88,4 +71,5 @@ public class EstoqueService {
 		}
 		estoqueRepository.save(estoqueAtualizado);
 	}
+	
 }
