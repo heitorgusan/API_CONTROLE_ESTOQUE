@@ -4,7 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.controledeestoque.br.model.EstoqueModel;
-import com.controledeestoque.br.model.ProdutoModel;
 import com.controledeestoque.br.model.SaidaModel;
 import com.controledeestoque.br.repository.EntradaRepository;
 import com.controledeestoque.br.repository.EstoqueRepository;
